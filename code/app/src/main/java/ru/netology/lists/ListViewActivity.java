@@ -37,12 +37,13 @@ public class ListViewActivity extends AppCompatActivity {
         final SwipeRefreshLayout swipeRefresh = findViewById(R.id.swipe_refresh);
         final BaseAdapter listContentAdapter = createAdapter(simpleAdapterContent);
 
-        String str = getString(R.string.large_text);
         savedText = getSharedPreferences("SavedText", MODE_PRIVATE);
-        SharedPreferences.Editor editor = savedText.edit();
-        savedText.edit()
-                .putString(NOTE_TEXT, str)
-                .apply();
+        if (!savedText.contains(NOTE_TEXT)) {
+            String str = getString(R.string.large_text);
+            savedText.edit()
+                    .putString(NOTE_TEXT, str)
+                    .apply();
+        }
 
         prepareContent();
 
